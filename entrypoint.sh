@@ -33,8 +33,16 @@ echo "Loading Modules: ${modules[@]}"
 
 command="redis-server"
 
-if [[ -v $REDIS_PARAMETERS ]]; then
+if [[ $REDIS_PARAMETERS != "" ]]; then
     command="$command $REDIS_PARAMETERS"
+fi
+
+if [[ $REDIS_PASSWORD != "" ]]; then
+    command="$command --requirepass $REDIS_PASSWORD"
+fi
+
+if [[ $REDIS_MAXMEMORY != "" ]]; then
+    command="$command --maxmemory $REDIS_MAXMEMORY"
 fi
 
 for module in "${modules[@]}"
