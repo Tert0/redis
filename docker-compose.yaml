@@ -1,0 +1,7 @@
+version: '3.9'
+
+services:
+    redis:
+        image: tert0/redis
+        environment:
+            - "REDIS_MODULES=REDIS_JSON,REDIS_SEARCH"
