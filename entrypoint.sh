@@ -22,7 +22,7 @@ getModulePath() {
 DEFAULT_REDIS_MODULES="REDIS_JSON,REDIS_SEARCH"
 
 if [[ $REDIS_MODULES == "" ]]; then
-    REDIS_MODULES=DEFAULT_REDIS_MODULES
+    REDIS_MODULES=$DEFAULT_REDIS_MODULES
 fi
 
 modules_str=${REDIS_MODULES//";"/","}
@@ -33,17 +33,29 @@ echo "Loading Modules: ${modules[@]}"
 
 command="redis-server"
 
-if [[ $REDIS_PARAMETERS != "" ]]; then
-    command="$command $REDIS_PARAMETERS"
-fi
+declare -A parameters
 
-if [[ $REDIS_PASSWORD != "" ]]; then
-    command="$command --requirepass $REDIS_PASSWORD"
-fi
+parameters["REDIS_PARAMTERS"]="$REDIS_PARAMTERS"
+parameters["REDIS_PASSWORD"]="--requirepass $REDIS_PASSWORD"
+parameters["MAXMEMORY"]="--maxmemory $MAXMEMORY"
 
-if [[ $REDIS_MAXMEMORY != "" ]]; then
-    command="$command --maxmemory $REDIS_MAXMEMORY"
-fi
+for parameter_name in "${!parameters[@]}"; do    
+    if [[ ${!parameter_name} != "" ]]; then
+        command="$command ${parameters[$parameter_name]}"
+    fi
+done
+
+#if [[ $REDIS_PARAMETERS != "" ]]; then
+#    command="$command $REDIS_PARAMETERS"
+#fi
+
+#if [[ $REDIS_PASSWORD != "" ]]; then
+#    command="$command --requirepass $REDIS_PASSWORD"
+#fi
+
+#if [[ $REDIS_MAXMEMORY != "" ]]; then
+#    command="$command --maxmemory $REDIS_MAXMEMORY"
+#fi
 
 for module in "${modules[@]}"
 do
