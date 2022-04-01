@@ -1,9 +1,9 @@
 #FROM redislabs/rejson as REDIS_JSON
-FROM debian as REDIS_BUILDER
+FROM --platform=$BUILDPLATFORM debian as REDIS_BUILDER
 
 RUN apt update && apt install -y git curl build-essential libclang-dev
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o rustup-init.sh && chmod +x rustup-init.sh && ./rustup-init.sh -y --default-toolchain nightly
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o rustup-init.sh && chmod +x rustup-init.sh && ./rustup-init.sh -y --default-toolchain stable
 
 ENV PATH="$PATH:/root/.cargo/bin"
 
