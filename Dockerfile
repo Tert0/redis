@@ -9,7 +9,7 @@ ENV PATH="$PATH:/root/.cargo/bin"
 
 RUN git clone https://github.com/RedisJSON/RedisJSON.git && cd RedisJSON && cargo build --release && ls ./target/release && cp ./target/release/librejson.so /rejson.so && cd /
 
-RUN git clone --recursive https://github.com/RediSearch/RediSearch.git && cd RediSearch && git checkout tags/v2.2.6 && make setup && make build && cp ./bin/linux-*-release/search/redisearch.so /redisearch.so && cd /
+RUN git clone --recursive https://github.com/RediSearch/RediSearch.git && cd RediSearch && git checkout $(git tag | sort -V | tail -1) && make setup && make build && cp ./bin/linux-*-release/search/redisearch.so /redisearch.so && cd /
 
 RUN git clone --recursive https://github.com/RedisBloom/RedisBloom.git && cd RedisBloom && make && cp redisbloom.so /redisbloom.so && cd /
 
