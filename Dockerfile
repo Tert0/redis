@@ -1,8 +1,9 @@
-FROM rust as REDIS_BUILDER
+FROM redislabs/rejson as REDIS_JSON
+FROM debian as REDIS_BUILDER
 
-RUN apt update && apt install -y git curl build-essential libclang-dev
+WORKDIR /
 
-RUN git clone https://github.com/RedisJSON/RedisJSON.git && cd RedisJSON && cargo build --release && ls ./target/release && cp ./target/release/librejson.so /rejson.so && cd /
+RUN apt update && apt install -y git build-essential libclang-dev
 
 RUN git clone --recursive https://github.com/RediSearch/RediSearch.git && cd RediSearch && git checkout $(git tag | sort -V | tail -1) && make setup && make build && cp ./bin/linux-*-release/search/redisearch.so /redisearch.so && cd /
 
@@ -14,7 +15,7 @@ FROM redis:latest
 
 COPY entrypoint.sh /entrypoint.sh
 
-COPY --from=REDIS_BUILDER /rejson.so /usr/lib/redisjson.so
+COPY --from=REDIS_JSON /usr/lib/redis/modules/rejson.so /usr/lib/redisjson.so
 COPY --from=REDIS_BUILDER /redisearch.so /usr/lib/redisearch.so
 COPY --from=REDIS_BUILDER /redisbloom.so /usr/lib/redisbloom.so
 COPY --from=REDIS_BUILDER /redistimeseries.so /usr/lib/redistimeseries.so
