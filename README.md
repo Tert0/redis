@@ -12,6 +12,8 @@
 - Set Custem Start Paramterers
 - Set Password, Memory Limit with an Environment Variable
 
+**This doesn't work on ARM (yet)**
+
 
 ## Environment Variables
 
