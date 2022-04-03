@@ -28,6 +28,9 @@ If this argument is not given, it will be `REDIS_JSON,REDIS_SEARCH` by default.
 - `REDIS_SEARCH`
 - `REDIS_BLOOM`
 - `REDIS_TIMESERIES`
+- `REDIS_GEARS`
+- `REDIS_AI`
+- `REDIS_GRAPH`
 
 ### `REDIS_PARAMETERS`
 

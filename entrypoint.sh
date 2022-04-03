@@ -13,6 +13,15 @@ getModulePath() {
         "REDIS_TIMESERIES")
             echo "/usr/lib/redistimeseries.so"
             ;;
+        "REDIS_GEARS")
+            echo "/usr/lib/redisgears.so"
+            ;;
+        "REDIS_AI")
+            echo "/usr/lib/redisai.so"
+            ;;
+        "REDIS_GRAPH":
+            echo "/usr/lib/redisgraph.so"
+            ;;
         *)
             echo $module
             ;;
