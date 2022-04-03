@@ -19,7 +19,7 @@ getModulePath() {
         "REDIS_AI")
             echo "/usr/lib/redisai.so"
             ;;
-        "REDIS_GRAPH":
+        "REDIS_GRAPH")
             echo "/usr/lib/redisgraph.so"
             ;;
         *)
