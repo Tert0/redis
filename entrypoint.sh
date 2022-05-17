@@ -13,12 +13,13 @@ getModulePath() {
         "REDIS_TIMESERIES")
             echo "/usr/lib/redistimeseries.so"
             ;;
-        "REDIS_GEARS")
-            echo "/usr/lib/redisgears.so"
-            ;;
-        "REDIS_AI")
-            echo "/usr/lib/redisai.so"
-            ;;
+# Currently not Supported due arm64 and arm/v7 build problems
+#        "REDIS_GEARS")
+#            echo "/usr/lib/redisgears.so Plugin /usr/lib/gears_python.so"
+#            ;;
+#        "REDIS_AI")
+#            echo "/usr/lib/redisai.so"
+#            ;;
         "REDIS_GRAPH")
             echo "/usr/lib/redisgraph.so"
             ;;

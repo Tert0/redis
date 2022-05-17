@@ -11,9 +11,9 @@
     - Redis Timeseries
 - Set Custem Start Paramterers
 - Set Password, Memory Limit with an Environment Variable
+- Supports: amd64 and arm64
 
-**This doesn't work on ARM (yet)**
-
+**Important: arm/v7(arm32) is currently not supported**
 
 ## Environment Variables
 
@@ -30,9 +30,11 @@ If this argument is not given, it will be `REDIS_JSON,REDIS_SEARCH` by default.
 - `REDIS_SEARCH`
 - `REDIS_BLOOM`
 - `REDIS_TIMESERIES`
+- `REDIS_GRAPH`
+
+**Currently not supported**
 - `REDIS_GEARS`
 - `REDIS_AI`
-- `REDIS_GRAPH`
 
 ### `REDIS_PARAMETERS`
 
